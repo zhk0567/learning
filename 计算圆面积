@@ -1,0 +1,50 @@
+使用7种方法计算圆面积，主要区别于保留小数点位数方式和pi的表达方式，包含对非数字情况检查
+
+from decimal import Decimal
+import numpy as np
+import math
+
+class NotANumberError(Exception):
+    pass
+
+def check(radius):
+    if not radius.isdigit():
+        raise NotANumberError(f"{radius}不是有效数字")
+    return radius
+
+def area_of_circle1(radius):
+    area = 3.14 * radius ** 2
+    return area
+
+def area_of_circle2(radius):
+    area = 3.14 * radius ** 2
+    return '{:.2f}'.format(area)
+
+def area_of_circle3(radius):
+    area = 3.14 * radius ** 2
+    return '%.2f' % area
+
+def area_of_circle4(radius):
+    area = 3.14 * pow(radius, 2)
+    return '{:.2f}'.format(area)
+
+def area_of_circle5(radius):
+    area = 3.14 * pow(radius, 2)
+    return Decimal(area).quantize(Decimal('0.01'))
+
+def area_of_circle6(radius):
+    area = 3.14 * np.square(radius)
+    return '{:.2f}'.format(area)
+
+def area_of_circle7(radius):
+    area = float(math.pi) * pow(radius, 2)
+    return '{:.2f}'.format(area)
+
+radius = input()
+try:
+    radius = check(radius)
+    radius = float(radius)
+    area = area_of_circle2(radius)
+    print(area)
+except NotANumberError as e:
+    print(e)
