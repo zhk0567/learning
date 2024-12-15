@@ -1,0 +1,50 @@
+def Fibonacci1(number): # 迭代
+    if number == 1:
+        return 0
+    elif number == 2:
+        return 1
+    else:
+        f1, f2 = 0, 1
+        for i in range(2, number):
+            f1, f2 = f2, f1 + f2
+        return f2
+
+def Fibonacci2(number): # 递归
+    f1 = 0
+    f2 = 1
+    if number == 1:
+        return 0
+    elif number == 2:
+        return 1
+    else:
+        return Fibonacci2(number-1) + Fibonacci2(number-2)
+
+def Fibonacci3(number): # 公式
+    a = pow((1 + pow(5, 0.5))/2, number - 1)
+    b = pow((1 - pow(5, 0.5))/2, number - 1)
+    return int((a - b) / pow(5, 0.5))
+
+def Fibonacci4(number): # 动态
+    if number == 1:
+        return 0
+    elif number == 2:
+        return 1
+    else:
+        i = 0
+        array = [0, 1] + [0] * (number - 2)
+        for i in range(2, number):
+            array[i] = array[i - 1] + array[i - 2]
+        return array[i]
+
+def Fibonacci5(number): # 缓存
+    cache = {}
+    if number in cache:
+        return cache[number]
+    elif number == 1:
+        return 0
+    elif number == 2:
+        return 1
+    else:
+        result = Fibonacci4(number-1) + Fibonacci4(number-2)
+        cache[number] = result
+        return result
