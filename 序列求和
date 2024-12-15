@@ -1,0 +1,33 @@
+from functools import reduce
+
+def symposium1(n): # 公式
+    return n * (n + 1) // 2 # 使用整除，避免浮点数运算
+
+def symposium2(n): # 函数
+    return sum(range(1, n + 1))
+
+def symposium3(n): #reduce函数：将对象传入方程
+    return reduce(lambda x, y: x + y, range(1, n + 1))
+
+def symposium4(n): #map函数：将对象传入方程。实际上与symposium2(n)没有区别
+    return sum(map(int, range(1, n + 1)))
+
+def symposium5(n): # for循环
+    sum = 0
+    for i in range(1, n + 1):
+        sum += i
+    return sum
+
+def symposium6(n): # while循环
+    i = 0
+    sum = 0
+    while i <= n:
+        sum += i
+        i += 1
+    return sum
+
+def symposium7(n): # 递归
+    if n == 1:
+        return 1
+    else:
+        return n + symposium5(n - 1)
